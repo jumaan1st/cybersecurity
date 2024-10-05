@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>You Have Been Hacked!</title>
+    
+    <style>
+        /* Universal Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Heading Styles */
+        .hacked-message h1 {
+            font-size: 8vw; /* Scales based on viewport width */
+            background: linear-gradient(90deg, #ff6f61, #ff9966);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+            animation: blink 1s infinite;
+            margin-bottom: 20px;
+        }
+
+        .hacked-message p {
+            font-size: 1.8rem; /* Adjust for larger screens */
+            color: #ff6f61;
+            margin-bottom: 20px;
+        }
+
+        /* Fun message styles with delays */
+        .fun-message p1,
+        .fun-message p {
+            opacity: 0; /* Hidden initially */
+            animation: fadeIn 1.5s forwards;
+        }
+
+        .fun-message p1 {
+            font-size: 1.5rem; /* Decreased font size */
+            color: #66bb6a;
+            margin-top: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            animation-delay: 1s; /* Add delay to the first message */
+        }
+
+        .fun-message p:nth-of-type(1) {
+            font-size: 1.4rem;
+            margin: 10px;
+            color: #6b6b6b;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            animation-delay: 2s; /* Delay for the second line */
+        }
+
+        .fun-message p:nth-of-type(2) {
+            font-size: 1.4rem;
+            margin: 10px;
+            color: #6b6b6b;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            animation-delay: 3s; /* Delay for the third line */
+        }
+
+        /* Button Styles */
+        .register-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(90deg, #8e44ad, #3498db);
+            color: white;
+            text-decoration: none;
+            font-size: 1.4rem;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.6);
+            animation: pulse-btn 1.5s infinite;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+            animation-delay: 4s; /* Delay for the button */
+        }
+
+        .register-btn:hover {
+            background: linear-gradient(90deg, #7d3c98, #2980b9);
+            box-shadow: 0 0 20px rgba(52, 152, 219, 0.8);
+        }
+
+        /* Popup Styles */
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 3px solid #8e44ad;
+            border-radius: 15px;
+            color: #333;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(142, 68, 173, 0.6);
+            animation: pop 2s infinite;
+            width: 80vw; /* Responsive width */
+        }
+
+        .popup h1 {
+            font-size: 1.8rem;
+            color: #8e44ad;
+            margin-bottom: 10px;
+        }
+
+        .popup p {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        /* Keyframe Animations */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes pulse-btn {
+            0%, 100% { box-shadow: 0 0 15px rgba(52, 152, 219, 0.6); }
+            50% { box-shadow: 0 0 30px rgba(52, 152, 219, 0.8); }
+        }
+
+        @keyframes pop {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        /* Responsive Design: Large Screens */
+        @media (min-width: 1024px) {
+            .hacked-message h1 {
+                font-size: 5rem; /* Larger heading on bigger screens */
+            }
+
+            .fun-message p1 {
+                font-size: 2rem; /* Decreased font size */
+            }
+
+            .popup {
+                width: 50vw; /* Slightly larger for large screens */
+            }
+
+            .popup h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Responsive Design: Small Screens */
+        @media screen and (max-width: 600px) {
+            .popup h1 {
+                font-size: 1.6rem; /* Scalable heading */
+            }
+
+            .register-btn {
+                font-size: 1.2rem; /* Bigger button on small screens */
+            }
+
+            .popup {
+                width: 90vw;
+            }
+
+            .hacked-message h1 {
+                font-size: 6vw; /* Slightly bigger text */
+            }
+
+            .hacked-message p1 {
+                font-size: 1.4rem;
+            }
+
+            .fun-message p1 {
+                font-size: 1.2rem; /* Decreased font size for small screens */
+            }
+
+            .fun-message p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hacked-message">
+            <h1>YOU HAVE </h1>
+            <h1>BEEN HACKED!</h1>
+            <p>Oh no! Looks like your system is under attack!</p>
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <div class="fun-message">
+            <p1>Just kidding, this was for fun!</p1>
+            <p>Let your friends try this and see their reaction!</p>
+            <p>Click below to register and never get fooled again!</p>
+            <a href="register.html" class="register-btn">Claim Your Spot !</a>
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybercrime Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background image and layout settings */
+        body {
+            font-family: Arial, sans-serif;
+            background: url('background1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+            color: white; /* Set text color to white */
+        }
+
+        .container {
+            width: 90%; /* Dynamic width */
+            max-width: 1000px; /* Maximum width for large screens */
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+            border: 2px solid #00ffcc;
+            overflow-y: auto;
+            opacity: 0; /* For fade-in effect */
+            animation: fadeIn 1.5s ease-in-out forwards; /* Fade-in animation */
+            transform: translateY(20px); /* Start slightly lower for a smooth entry */
+            transition: transform 0.3s ease; /* Smooth transform */
+        }
+
+        /* Introduction text */
+        .intro {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: bounceIn 1.5s ease-in-out; /* Bounce effect */
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounceIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Question box styling */
+        .question-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0, 255, 204, 0.3);
+            animation: slideInLeft 0.8s ease-out; /* Slide-in animation for question */
+            transform: translateY(10px); /* Start slightly lower for a smooth entry */
+            transition: transform 0.3s ease; /* Smooth transform */
+        }
+
+        /* Styling quiz questions */
+        .question {
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .answers {
+            list-style: none;
+            padding-left: 0;
+            opacity: 0; /* Initially hidden */
+            animation: fadeIn 0.5s forwards; /* Fade-in effect for the entire list */
+            animation-delay: 0.3s; /* Delay for the list */
+        }
+
+        .answers li {
+            margin-bottom: 12px;
+            font-size: 16px;
+            opacity: 0; /* Initially hidden */
+            transform: translateY(10px); /* Start lower for animation */
+            animation: slideInRight 0.8s ease-out forwards; /* Slide-in animation for answers */
+            transition: opacity 0.5s ease; /* Smooth opacity transition */
+        }
+
+        /* Show answers after animation */
+        .answers li:nth-child(1) {
+            animation-delay: 0.1s; /* Delay for each option */
+        }
+        .answers li:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .answers li:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        /* Hover effect for question boxes */
+        .question-box:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 15px rgba(0, 255, 204, 0.7);
+        }
+
+        /* Styling the submit button */
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.2s ease, background-color 0.3s ease; /* Smooth scale and color transition */
+            animation: vertical-shake 3s infinite ease-in-out; /* Faster and more visible shake */
+        }
+
+        /* Change background on hover */
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+
+        /* Enlarge when clicked */
+        .submit-btn:active {
+            transform: scale(1.1);
+        }
+
+        /* Visible vertical shake animation */
+        @keyframes vertical-shake {
+            0%, 100% {
+                transform: translateY(0); /* Default position */
+            }
+            25%, 75% {
+                transform: translateY(-4px); /* Move up 4px */
+            }
+            50% {
+                transform: translateY(4px); /* Move down 4px */
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .question {
+                font-size: 18px;
+            }
+
+            .submit-btn {
+                font-size: 18px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            body {
+                background-attachment: fixed;
+            }
+
+            .container {
+                margin-top: 5vh;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <p class="intro">Answer these questions to win exciting Gift Cards!</p>
+
+        <!-- Quiz Section -->
+        <form id="quizForm" onsubmit="return validateForm()">
+            <div class="quiz">
+                <div class="question-box">
+                    <div class="question">
+                        <p>1. What is used to protect sensitive data during transmission?</p>
+                        <br>
+                        <ul class="answers">
+                            <li><input type="radio" name="q1" id="q1a" value="firewall">
+                                <label for="q1a">Firewall</label></li>
+                            <li><input type="radio" name="q1" id="q1b" value="encryption">
+                                <label for="q1b">Encryption</label></li>
+                            <li><input type="radio" name="q1" id="q1c" value="authentication">
+                                <label for="q1c">Authentication</label></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question">
+                        <p>2. What technology is used to create a secure connection over the internet?</p>
+                        <br>
+                        <ul class="answers">
+                            <li><input type="radio" name="q2" id="q2a" value="ssl">
+                                <label for="q2a">SSL</label></li>
+                            <li><input type="radio" name="q2" id="q2b" value="http">
+                                <label for="q2b">HTTP</label></li>
+                            <li><input type="radio" name="q2" id="q2c" value="ftp">
+                                <label for="q2c">FTP</label></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question">
+                        <p>3. What type of malware is designed to replicate itself?</p>
+                        <br>
+                        <ul class="answers">
+                            <li><input type="radio" name="q3" id="q3a" value="virus">
+                                <label for="q3a">Virus</label></li>
+                            <li><input type="radio" name="q3" id="q3b" value="trojan">
+                                <label for="q3b">Trojan</label></li>
+                            <li><input type="radio" name="q3" id="q3c" value="worm">
+                                <label for="q3c">Worm</label></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question">
+                        <p>4. What is the primary purpose of a firewall?</p>
+                        <br>
+                        <ul class="answers">
+                            <li><input type="radio" name="q4" id="q4a" value="prevent-attacks">
+                                <label for="q4a">To prevent phishing attacks</label></li>
+                            <li><input type="radio" name="q4" id="q4b" value="monitor-traffic">
+                                <label for="q4b">To monitor and control network traffic</label></li>
+                            <li><input type="radio" name="q4" id="q4c" value="encrypt-data">
+                                <label for="q4c">To encrypt data</label></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var q1Selected = document.querySelector('input[name="q1"]:checked');
+            var q2Selected = document.querySelector('input[name="q2"]:checked');
+            var q3Selected = document.querySelector('input[name="q3"]:checked');
+            var q4Selected = document.querySelector('input[name="q4"]:checked');
+
+            if (!q1Selected || !q2Selected || !q3Selected || !q4Selected) {
+                alert('Please answer all questions before submitting.');
+                return false;
+            }
+
+            window.location.href = 'voucher.html'; 
+            return false;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Voucher</title>
+
+    <style>
+        /* Reset default margins */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Main container for the voucher */
+        .voucher-container {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        /* Amazon-like heading styling */
+        h1 {
+            color: #111;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        /* Amazon-like paragraph styling */
+        p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #565959;
+        }
+
+        /* Amazon-like voucher button */
+        .voucher-code {
+            font-size: 18px;
+            font-weight: bold;
+            color: #111;
+            background-color: #FF9900;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .voucher-code:hover {
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Additional styling for small text or footnote */
+        .small-text {
+            font-size: 12px;
+            color: #888;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Voucher Content -->
+    <div class="voucher-container">
+        <h1>Congratulations!</h1>
+        <p>You've received an Amazon Gift Card!</p>
+
+        <!-- Voucher Button -->
+        <button class="voucher-code" onclick="redirectToSpamPage()">Claim Your ₹50 Voucher</button>
+        
+        <p class="small-text">Terms and conditions apply.</p>
+    </div>
+
+    <!-- Script for confetti burst using Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // Function to redirect to another page
+        function redirectToSpamPage() {
+            setTimeout(function() {
+                window.location.href = 'spammed.html';
+            }, 500); // Half a second delay for a smoother experience
+        }
+
+        // Confetti burst effect on page load
+        function fireConfetti() {
+            var duration = 1 * 1000; // 2 seconds duration
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 7,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 7,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // Fire confetti once when the page loads
+        window.onload = function() {
+            fireConfetti();
+        }
+    </script>
+
+</body>
+</html>
